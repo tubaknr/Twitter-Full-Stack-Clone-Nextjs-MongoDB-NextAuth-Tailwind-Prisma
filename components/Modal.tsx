@@ -1,11 +1,13 @@
+"use client"
+
 import { useCallback } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import  Button from "./Button";
 
 interface ModalProps{
     isOpen?: boolean;
-    onClose: () => void;
-    onSubmit: () => void;
+    onClose?: () => void;
+    onSubmit?: () => void;
     title?: string;
     body?: React.ReactElement;
     footer?: React.ReactElement;
@@ -28,9 +30,20 @@ const Modal: React.FC<ModalProps> = ({
         if(disabled){
             return;
         }
+        onClose();
+    }, 
+    [disabled, onClose]);
+
+
+    const handleSubmit = useCallback(() => {
+        if(disabled){
+            return;
+        }
+
         onSubmit();
     }, 
     [disabled, onSubmit]);
+
 
     if (!isOpen){
         return null;
@@ -51,6 +64,7 @@ const Modal: React.FC<ModalProps> = ({
                 focus:outline-none
                 bg-neutral-800
                 bg-opacity-70">
+
                     <div className="
                         relative
                         w-full
@@ -98,15 +112,24 @@ const Modal: React.FC<ModalProps> = ({
                                             transition">
                                             <AiOutlineClose size={20} /> 
                                         </button>
-
                                 </div>
-                            {/* Body */}
+                                {/* Body */}
+                                
+                                <div className="relative p-10 flex-auto">
+                                    {body}
+                                </div>
+                                
+                                {/* Footer */}
 
-                            </div>
-                            {/* Footer */}
-                            <div className="flex flex-col gap-2 p-10">
-                                <Button/>
-
+                                <div className="flex flex-col gap-2 p-10">
+                                    <Button disabled={disabled} 
+                                            label={actionLabel} 
+                                            secondary 
+                                            fullWidth 
+                                            large 
+                                            onClick={handleSubmit}/>
+                                            {footer}
+                                </div>
                             </div>
                     </div>
             </div>
