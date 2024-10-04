@@ -45,3 +45,5 @@ const Button: React.FC<ButtonProps> = ({ label, secondary, fullWidth, large, onC
         </button>
     )
 }
+
+export default Button;
