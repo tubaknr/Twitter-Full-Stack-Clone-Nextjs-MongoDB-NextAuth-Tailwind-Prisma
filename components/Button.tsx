@@ -1,5 +1,3 @@
-
-
 interface ButtonProps{
     label: string;
     secondary?: boolean;

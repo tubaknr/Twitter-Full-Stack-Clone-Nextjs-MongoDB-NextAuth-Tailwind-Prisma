@@ -6,7 +6,7 @@ interface inputProps{
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const input: React.FC<inputProps> = ({
+const Input: React.FC<inputProps> = ({
     placeholder, 
     value,
     type,
@@ -15,6 +15,7 @@ const input: React.FC<inputProps> = ({
 }) => {
     return(
         <>
+        
         <input 
             disabled={disabled}
             value={value}
@@ -36,11 +37,11 @@ const input: React.FC<inputProps> = ({
                 transition
                 disabled:bg-neutral-900
                 disabled:opacity-70
-                disabled:cursor-not-allowed">
-        
-        </input>
+                disabled:cursor-not-allowed"
+        />
+
         </>
     )
 }
 
-export default input;
+export default Input;

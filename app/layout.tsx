@@ -1,29 +1,54 @@
+"use client";
+
 import type { Metadata } from "next";
 import "./globals.css";
 import Sidebar from "@/components/Sidebar";
 import FollowBar from "@/components/FollowBar";
-import Modal from "@/components/Modal";
+import LoginModal from "@/components/modals/LoginModal";
+import { useEffect, useReducer, useState } from "react";
+import useLoginModal from "@/hooks/useLoginModal";
+import useRegisterModal from "@/hooks/useRegister";
+import RegisterModal from "@/components/modals/RegisterModal";
 
-
-export const metadata: Metadata = {
-  title: "Twitter",
-  description: "Twitter",
-};
+// export const metadata: Metadata = {
+//   title: "Twitter",
+//   description: "Twitter",
+// };
 
 interface LayoutProps{
   children: React.ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({children}) => {
-    const isAuthenticated = false;
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isRegistered, setIsRegistered] = useState(false);
+    
+    const loginModal = useLoginModal();
+    const registerModal = useRegisterModal();
+
+    // console.log("isopen:", loginModal.isOpen);
+    
+    
+    useEffect(() => {
+      if(!loginModal.isOpen){ //giriş login kısmı görünmüyorsa
+        setIsAuthenticated(true); //authenticated. giriş yapıldı.
+      }
+    }, [loginModal.isOpen]);
+
+
+    // console.log("isAuthenticated:", isAuthenticated);
 
 return(
   <html lang="en">
     <body>
+      
+      {!isRegistered && <RegisterModal />}
 
-      {!isAuthenticated && <Modal isOpen title="Test Modal" actionLabel="Submit"/>}
+      {/* Show the login modal if the user is not authenticated */}
+      {!isAuthenticated && isRegistered && <LoginModal />}
 
-      {isAuthenticated && 
+      {/* Show the main content if the user is authenticated */}
+      {isAuthenticated &&
        <div className="h-screen bg-black">
         <div className="container h-full mx-auto xl:px-30 max-w-6xl">
           <div className="grid grid-cols-4 h-full">
@@ -38,8 +63,8 @@ return(
 
           </div>
         </div>
-       </div>}
-
+       </div>
+      }
 
       </body>
     </html>

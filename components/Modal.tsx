@@ -103,13 +103,13 @@ const Modal: React.FC<ModalProps> = ({
                                         </h3>
                                         
                                         <button onClick={handleClose}
-                                            className="
-                                            p-1
-                                            ml-auto
-                                            border-0
-                                            text-white
-                                            hover:opacity-70
-                                            transition">
+                                                className="
+                                                p-1
+                                                ml-auto
+                                                border-0
+                                                text-white
+                                                hover:opacity-70
+                                                transition">
                                             <AiOutlineClose size={20} /> 
                                         </button>
                                 </div>

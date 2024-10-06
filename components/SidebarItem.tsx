@@ -37,8 +37,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({label, href, icon:Icon, onClic
                 rounded-full
                 hover:bg-slate-300
                 hover:bg-opacity-10
-                cursor-pointer
-                ">
+                cursor-pointer">
                     <Icon size={28} className="text-white"/>
                     
                     <p className="
@@ -46,7 +45,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({label, href, icon:Icon, onClic
                         lg:block
                         text-white
                         text-xl">
-                            {label}
+                        {label}
                     </p>
             </div>
         </div>
