@@ -29,11 +29,18 @@ const Layout: React.FC<LayoutProps> = ({children}) => {
     // console.log("isopen:", loginModal.isOpen);
     
     
-    useEffect(() => {
-      if(!loginModal.isOpen){ //giriş login kısmı görünmüyorsa
-        setIsAuthenticated(true); //authenticated. giriş yapıldı.
-      }
-    }, [loginModal.isOpen]);
+    // useEffect(() => {
+    //   if(!loginModal.isOpen){ //giriş login kısmı görünmüyorsa
+    //     setIsAuthenticated(true); //authenticated. giriş yapıldı.
+    //   }
+    // }, [loginModal.isOpen]);
+    
+
+    // useEffect(() => {
+    //   if(!registerModal.isOpen){ //giriş login kısmı görünmüyorsa
+    //     setIsRegistered(true); //authenticated. giriş yapıldı.
+    //   }
+    // }, [registerModal.isOpen]);
 
 
     // console.log("isAuthenticated:", isAuthenticated);
@@ -42,13 +49,11 @@ return(
   <html lang="en">
     <body>
       
-      {!isRegistered && <RegisterModal />}
+       <RegisterModal />
 
-      {/* Show the login modal if the user is not authenticated */}
-      {!isAuthenticated && isRegistered && <LoginModal />}
+       <LoginModal />
 
-      {/* Show the main content if the user is authenticated */}
-      {isAuthenticated &&
+      
        <div className="h-screen bg-black">
         <div className="container h-full mx-auto xl:px-30 max-w-6xl">
           <div className="grid grid-cols-4 h-full">
@@ -64,7 +69,7 @@ return(
           </div>
         </div>
        </div>
-      }
+      
 
       </body>
     </html>

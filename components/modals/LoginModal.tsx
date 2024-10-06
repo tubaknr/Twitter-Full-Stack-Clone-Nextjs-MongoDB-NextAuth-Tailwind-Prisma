@@ -4,13 +4,25 @@ import useLoginModal from "@/hooks/useLoginModal";
 import Input from "@/components/Input";
 import { useCallback, useState } from "react";
 import Modal from "@/components/Modal";
+import useRegisterModal from "@/hooks/useRegister";
 
 const LoginModal = () => {
     const loginModal = useLoginModal();
-    
+    const registerModal = useRegisterModal();
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    
+
+    const onToggle = useCallback(() => {
+        if(isLoading){
+            return;
+        }
+
+        loginModal.onClose();
+        registerModal.onOpen();
+    }, [registerModal, loginModal, isLoading]);
     
     
     const onSubmit = useCallback(async () => {
@@ -49,7 +61,21 @@ const LoginModal = () => {
     )
 
 
+    const footerContent = (
+        <div className="text-neutral-400 text-center mt-4">
+            <p>
+                First time using Twitter? &nbsp;  
+                <span onClick={onToggle}
+                      className="text-white cursor-pointer hover:underline">
+                      Create an account 
+                </span>
+            </p>
+        </div>
+    )
+
+
     return(
+        <>
         <Modal 
             disabled={isLoading}
             isOpen={loginModal.isOpen}
@@ -58,7 +84,10 @@ const LoginModal = () => {
             onClose={loginModal.onClose}
             onSubmit={onSubmit}
             body={bodyContent}
+            footer={footerContent}
         />
+        </>
+
     );
 } 
 
