@@ -6,10 +6,21 @@ import { BiLogOut } from 'react-icons/bi';
 import SidebarTweetButton from "./SidebarTweetButton";
 import useCurrentUser from '@/hooks/useCurrentUser';
 import { signOut } from "next-auth/react";
+import { toast } from 'react-hot-toast';  
+
 
 const Sidebar = () => {
     const { data: currentUser } = useCurrentUser();
     console.log("currentUser:",{currentUser});
+
+    const handleLogout = async () => {
+        try{
+            await signOut();
+            toast.success("Logged out successfully.");
+        }catch(error){
+            toast.error("Error during logout.");
+        }
+    }
 
     const items = [
         {
@@ -46,7 +57,7 @@ const Sidebar = () => {
                         
                         {currentUser && ( 
                         <SidebarItem 
-                            onClick={() => signOut()} 
+                            onClick={handleLogout} 
                             icon={BiLogOut}
                             label='Logout'/>
                         )}
