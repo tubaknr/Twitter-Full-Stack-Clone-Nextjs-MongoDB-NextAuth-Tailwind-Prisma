@@ -1,5 +1,5 @@
 "use client"
-
+import { signIn } from "next-auth/react";
 import useLoginModal from "@/hooks/useLoginModal";
 import Input from "@/components/Input";
 import { useCallback, useState } from "react";
@@ -29,7 +29,7 @@ const LoginModal = () => {
         try{
             setIsLoading(true);
             
-            //TODO ADD LOG IN
+            await signIn('credentials', {email, password});
 
             loginModal.onClose();
 
@@ -40,7 +40,7 @@ const LoginModal = () => {
             setIsLoading(false);
         }
 
-    }, [loginModal]);
+    }, [loginModal, email, password]);
 
 
     const bodyContent = (
