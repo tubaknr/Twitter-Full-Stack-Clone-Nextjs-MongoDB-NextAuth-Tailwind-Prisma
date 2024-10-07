@@ -5,6 +5,7 @@ import Input from "@/components/Input";
 import { useCallback, useState } from "react";
 import Modal from "@/components/Modal";
 import useRegisterModal from "@/hooks/useRegister";
+import axios from "axios";
 
 const RegisterModal = () => {
     const loginModal = useLoginModal();
@@ -14,7 +15,9 @@ const RegisterModal = () => {
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [userName, setUserName] = useState('');
+
     const [isLoading, setIsLoading] = useState(false);
+
 
     const onToggle = useCallback(() => {
         if(isLoading){
@@ -23,14 +26,17 @@ const RegisterModal = () => {
 
         registerModal.onClose();
         loginModal.onOpen();
-    }, [registerModal, loginModal, isLoading]);
+
+    }, 
+    [registerModal, loginModal, isLoading]);
     
     
+
     const onSubmit = useCallback(async () => {
         try{
             setIsLoading(true);
             
-            //TODO ADD REGISTER AND LOG IN
+            await axios.post('/api/register', { email, password, userName, name});
 
             registerModal.onClose();
 
@@ -41,7 +47,8 @@ const RegisterModal = () => {
             setIsLoading(false);
         }
 
-    }, [registerModal]);
+    }, 
+    [registerModal, email, password, userName, name]);
 
 
     const bodyContent = (
