@@ -5,9 +5,10 @@ import bcrypt from 'bcrypt';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse){
     if (req.method !== "POST"){
+        console.log("Method is not POST. Register.ts")
         return res.status(405).end();
     }
-    
+
     try{
         const [email, username, name, password] = req.body();
 
@@ -23,10 +24,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     }catch(error){
         console.log("Try error. Register.ts");
-    }
-
-    else{
-        console.log("Method is not POST. Register.ts")
         return res.status(400).end();
     }
 }
