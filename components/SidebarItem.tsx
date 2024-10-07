@@ -1,15 +1,23 @@
 import { useCallback } from "react";
 import { IconType } from "react-icons";
 import { useRouter } from "next/navigation";
+import useCurrentUser from "@/hooks/useCurrentUser";
+import useLoginModal from "@/hooks/useLoginModal";
+import useRegisterModal from "@/hooks/useRegister";
 
 interface SidebarItemProps{
     label?: string;
     href?: string;
     icon?: IconType;
     onClick?: () => void;
+    auth?: boolean;
 }
 
-const SidebarItem: React.FC<SidebarItemProps> = ({label, href, icon:Icon, onClick}) => {
+const SidebarItem: React.FC<SidebarItemProps> = ({label, href, icon:Icon, onClick, auth}) => {
+
+    const { data: currentUser } = useCurrentUser();
+    const loginModal = useLoginModal();
+    const registerModal = useRegisterModal();
 
     const router = useRouter();
 
@@ -17,10 +25,14 @@ const SidebarItem: React.FC<SidebarItemProps> = ({label, href, icon:Icon, onClic
         if(onClick){
             return onClick();
         }
-        if(href){
+        if (auth && !currentUser){ //if this route is protected and user is log out;
+            loginModal.onOpen();
+            registerModal.onClose();
+        }
+        else if(href){ //tıkladığı sayfaya git
             router.push(href);
         }
-    }, [router, href, onClick]);
+    }, [router, href, onClick, currentUser, auth, loginModal]);
 
     return(
         <div onClick={handleClick} 

@@ -26,17 +26,20 @@ const Sidebar = () => {
         {
             label: 'Home',
             href: '/',
-            icon: BsHouseFill
+            icon: BsHouseFill 
+            // you can always go to Home, whether log in or not.
         },
         {
             label: 'Notifications',
             href: '/notifications',
-            icon: BsBellFill
+            icon: BsBellFill,
+            auth: true // true->this route is protected->if log out you cant go to the Notifications.
         },
         {
             label: 'Profile',
             href: '/users/123',
-            icon: FaUser
+            icon: FaUser,
+            auth: true // true->this route is protected->if log out you cant go to the Profile.
         },
 
     ]
@@ -52,7 +55,8 @@ const Sidebar = () => {
                             key={item.href}
                             href={item.href}
                             label={item.label}
-                            icon={item.icon}/>
+                            icon={item.icon}
+                            auth={item.auth}/>
                         ))}
                         
                         {currentUser && ( 

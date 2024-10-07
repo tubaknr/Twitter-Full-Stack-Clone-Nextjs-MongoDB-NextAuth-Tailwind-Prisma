@@ -1,4 +1,12 @@
+import useUsers from "@/hooks/useUsers";
+
 const FollowBar = () => {
+
+    const { data: users = [] } = useUsers();
+    
+    
+    
+    
     return(
         <div className="px-6 py-4 hidden lg:block">
             <div className="bg-neutral-800 rounded-xl p-4">
