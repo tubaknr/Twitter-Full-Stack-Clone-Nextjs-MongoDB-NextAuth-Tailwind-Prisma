@@ -2,6 +2,7 @@ import { NextApiRequest } from "next";
 import { getSession } from "next-auth/react";
 
 const serverAuth = async(req: NextApiRequest){
+   
     const session = getSession({ req });
 
     if (!session?.user?.email){
@@ -21,4 +22,4 @@ const serverAuth = async(req: NextApiRequest){
     return {currentUser};
 };
 
-export default serverAuth;
+export default serverAuth; 

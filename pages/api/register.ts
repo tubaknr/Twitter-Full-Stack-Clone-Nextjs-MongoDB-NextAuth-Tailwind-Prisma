@@ -7,6 +7,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (req.method !== "POST"){
         return res.status(405).end();
     }
+    
     try{
         const [email, username, name, password] = req.body();
 
@@ -17,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 email, username, name, hashedPassword 
             }
         });
-        
+
         return res.status(200).json(user);
 
     }catch(error){
