@@ -37,7 +37,7 @@ const Sidebar = () => {
         },
         {
             label: 'Profile',
-            href: '/users/123',
+            href: `/users/${currentUser?.id}`,
             icon: FaUser,
             auth: true // true->this route is protected->if log out you cant go to the Profile.
         },
