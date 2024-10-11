@@ -14,14 +14,15 @@ const Avatar:React.FC<AvatarProps> = ({userId, isLarge, hasBorder}) => {
     const router = useRouter();
     const { data: fetchedUser } = useUser(userId);
     
+
     const onClick = useCallback((event: any) => {
-        event.stopPropagation(); //avatara tıklandığında, avatarın içinde bulunduğu ve tıklanabilir olan elementlerin tıklanabilirliği iptal olsun ve sadece avatara tıklanmış gibi olsun.
-        
+        event.stopPropagation(); //avatara tıklandığında, avatarın içinde bulunduğu ve tıklanabilir olan elementlerin tıklanabilirliği iptal olsun ve sadece avatara tıklanmış gibi olsun.    
         //avatar a tıklandığında o user a gitsin.
         const url = `/users/${userId}`;
         router.push(url);
     
     }, [router, userId]);
+
     
     return(
         <div className={`

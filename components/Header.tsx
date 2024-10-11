@@ -13,7 +13,7 @@ const Header: React.FC<HeaderProps> = ({ label, showBackArrow }) => {
     const router = useRouter();
     
     const handleBack = useCallback(() => {
-        router.back();
+        router.back(); //go to 1 page back
     }, [router]);
 
     

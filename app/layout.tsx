@@ -33,7 +33,7 @@ const LayoutContent:React.FC<LayoutContentProps> = ({ children }) => {
     const registerModal = useRegisterModal();
 
     if(status == "loading"){
-      console.log("LOADING LAYOUT.TSX");
+      console.log("LOADING app/LAYOUT.TSX");
     }
 
     return(

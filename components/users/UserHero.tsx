@@ -15,7 +15,7 @@ const UserHero: React.FC<UserHeroProps> = ({ userId }) => {
 
         <div className="bg-neutral-700 h-44 relative">
             
-            {fetchedUser?.coverImage && (
+            {fetchedUser?.coverImage && ( //if there is the coverImage
 
             <Image src={fetchedUser.coverImage}
                 fill 
@@ -24,7 +24,7 @@ const UserHero: React.FC<UserHeroProps> = ({ userId }) => {
 
             )}
             
-            <div className="absolute -bottom-16 left-4">
+            <div className="absolute -bottom-16 left-4"> 
             
                 <Avatar userId={userId} isLarge hasBorder/>
             
@@ -32,6 +32,6 @@ const UserHero: React.FC<UserHeroProps> = ({ userId }) => {
         
         </div>
     
-)
+    )
 }
 export default UserHero;

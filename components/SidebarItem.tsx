@@ -16,6 +16,7 @@ interface SidebarItemProps{
 const SidebarItem: React.FC<SidebarItemProps> = ({label, href, icon:Icon, onClick, auth}) => {
 
     const { data: currentUser } = useCurrentUser();
+    
     const loginModal = useLoginModal();
     const registerModal = useRegisterModal();
 
