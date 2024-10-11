@@ -6,18 +6,13 @@ import "./globals.css";
 import Sidebar from "@/components/Sidebar";
 import FollowBar from "@/components/FollowBar";
 import LoginModal from "@/components/modals/LoginModal";
-import { useEffect, useReducer, useState } from "react";
 import useLoginModal from "@/hooks/useLoginModal";
-import useRegisterModal from "@/hooks/useRegister";
+import useRegisterModal from "@/hooks/useRegisterModal";
 import RegisterModal from "@/components/modals/RegisterModal";
 import { Toaster } from "react-hot-toast";
 import { SessionProvider, useSession } from "next-auth/react";
+import EditModal from "@/components/modals/EditModal";
 
-
-// export const metadata: Metadata = {
-//   title: "Twitter",
-//   description: "Twitter",
-// };
 
 interface LayoutProps{
   children: React.ReactNode;
@@ -50,6 +45,8 @@ const LayoutContent:React.FC<LayoutContentProps> = ({ children }) => {
           {status === "unauthenticated" && loginModal.isOpen && <LoginModal />}
           
           {(
+            <>
+          <EditModal />
           <div className="h-screen bg-black">
             <div className="container h-full mx-auto xl:px-30 max-w-6xl">
               <div className="grid grid-cols-4 h-full">
@@ -65,6 +62,7 @@ const LayoutContent:React.FC<LayoutContentProps> = ({ children }) => {
               </div>
             </div>
           </div>
+          </>
           )}
         
          

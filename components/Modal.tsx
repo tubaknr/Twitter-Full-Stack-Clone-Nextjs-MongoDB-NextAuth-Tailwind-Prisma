@@ -127,10 +127,11 @@ const Modal: React.FC<ModalProps> = ({
                                             secondary 
                                             fullWidth 
                                             large 
-                                            onClick={handleSubmit}/>
-                                            {footer}
+                                            onClick={handleSubmit}
+                                        />
+                                        {footer}
                                 </div>
-                            </div>
+                        </div>
                     </div>
             </div>
         </>

@@ -3,7 +3,7 @@ import { IconType } from "react-icons";
 import { useRouter } from "next/navigation";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useLoginModal from "@/hooks/useLoginModal";
-import useRegisterModal from "@/hooks/useRegister";
+import useRegisterModal from "@/hooks/useRegisterModal";
 
 interface SidebarItemProps{
     label?: string;
