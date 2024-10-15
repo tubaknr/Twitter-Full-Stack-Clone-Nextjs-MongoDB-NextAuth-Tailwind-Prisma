@@ -6,10 +6,12 @@ import { useRouter } from "next/navigation";
 import { formatDistanceToNowStrict } from "date-fns";
 import { AiOutlineMessage, AiOutlineHeart } from "react-icons/ai";
 import Avatar from "../Avatar";
+import { useEffect } from 'react';
+import useUser from "@/hooks/useUser"; 
 
 interface PostItemProps {
     data: Record<string, any>;
-    userId?: string;
+    userId: string;
 }
 
 const PostItem: React.FC<PostItemProps> = ({ data, userId }) => {
@@ -18,14 +20,36 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId }) => {
     const loginModal = useLoginModal();
 
     const { data: currentUser } = useCurrentUser();
+    // const { data : currentUser } = useUser(userId);
+
+    console.log("currentUser POSTITEM.TS:", currentUser);
+    console.log("post data: ", data);
+    console.log("post data.body: ", data.body);
+    console.log("post data.id: ", data.id);
+    console.log("post data.user: ", data.user);
     
+    // if (!data || !data.user) return;
+    useEffect(() => {
+        // Check if data and user id are defined
+        if (data && data.user && data.user.id) {
+            console.log(`User ID: ${data.user.id}`);
+        } else {
+            console.error("User data is not loaded or user id is missing.");
+        }
+    }, [data]);
+
     // go to user
     const goToUser = useCallback((event: any) => {
         event.stopPropagation();
-
         router.push(`/users/${data.user.id}`);
+        // if (data?.user?.id) {
+            // router.push(`/users/${data.user.id}`);
+        // } else {
+        //     // console.error("User data is not available.");
+        // }
+        // router.push(`/users/${data.user.id}`);
     },
-    [router, data.user.id]);
+    [router, data]);
 
 
     // go to post 
@@ -49,6 +73,7 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId }) => {
         return formatDistanceToNowStrict(new Date(data.createdAt));
     }, [data?.createdAt]);
 
+    
     return(
         <>
             <div 
@@ -61,7 +86,7 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId }) => {
                     hover:bg-neutral-900
                     transition">
                     <div className="flex flex-row items-start gap-3">
-                        <Avatar userId={data.user.id} />
+                        <Avatar userId={data?.user?.id} />
                         <div>
                             <div className="flex flex-row items-center gap-2">
                                 <p  onClick={goToUser}
@@ -70,7 +95,7 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId }) => {
                                         font-semibold
                                         cursor-pointer
                                         hover:underline">
-                                    {data.user.name}
+                                    {data?.user?.name}
                                 </p>
                                 <span onClick={goToUser} 
                                       className="
@@ -79,7 +104,7 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId }) => {
                                         hover:underline
                                         hidden
                                         md:block">
-                                      @{data.user.username}
+                                      @{data?.user?.username}
                                 </span>
 
                                 <span className="text-neutral-500 text-sm">
@@ -87,7 +112,7 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId }) => {
                                 </span>
                             </div>
 
-                            <div className="text-white mt-1">
+                            <div className="text-white mt-1 font-bold">
                                 {data.body}
                             </div>
 

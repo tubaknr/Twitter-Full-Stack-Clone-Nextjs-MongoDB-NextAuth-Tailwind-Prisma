@@ -67,6 +67,8 @@ const EditModal = () => {
     }, 
     [profileImage, coverImage, name, username, bio]);
 
+    
+
     const bodyContent = (
         <div className="flex flex-col gap-4">
             

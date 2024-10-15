@@ -27,6 +27,7 @@ const Form: React.FC<FormProps> = ({ isComment, placeholder, postId }) => {
     const [body, setBody] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     
+
     const onSubmit = useCallback(async () => {
         try{
             setIsLoading(true);
@@ -44,6 +45,8 @@ const Form: React.FC<FormProps> = ({ isComment, placeholder, postId }) => {
             setIsLoading(false);
         }
     }, [body, mutatePosts]);
+
+
 
     return(
         <>
@@ -75,6 +78,7 @@ const Form: React.FC<FormProps> = ({ isComment, placeholder, postId }) => {
                             >
 
                         </textarea>
+
                             <hr className="
                                 opacity-0
                                 peer-focus:opacity-100
@@ -83,6 +87,7 @@ const Form: React.FC<FormProps> = ({ isComment, placeholder, postId }) => {
                                 border-neutral-800
                                 transition"
                             />
+                            
                             <div className="mt-4 mb-2 flex flex-row justify-end">
                                 <Button 
                                     disabled={isLoading || !body}

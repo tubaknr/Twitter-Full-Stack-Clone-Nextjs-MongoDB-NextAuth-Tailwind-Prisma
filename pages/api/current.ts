@@ -9,15 +9,16 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse) {
     try{
         const { currentUser } = await serverAuth(req, res);
 
-        if(!currentUser){
-            throw new Error("currentuser not found! current.ts");
-        }
+        // if(!currentUser){
+        //     // return res.status(404).json({ error: "Current user not found" });
+        // }
 
         return res.status(200).json(currentUser);
 
     }
     catch(error){
         console.log(error);
+        return res.status(400).end();
     }
 
 }

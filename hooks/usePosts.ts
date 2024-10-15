@@ -1,6 +1,23 @@
-import useSWR from "swr";
-import fetcher from "@/libs/fetcher"; // tells SWR how to fetch data from the API.
+"use client";
+import useSWR from 'swr';
 
+import fetcher from '@/libs/fetcher'; // tells SWR how to fetch data from the API.
+
+const usePosts = (userId?: string) => {
+  
+  const url = userId ? '/api/posts?userId=' + userId : '/api/posts';
+  // const url = `/api/posts?userId=${userId}`
+  const { data, error, isLoading, mutate } = useSWR(url, fetcher);
+
+  return {
+    data,
+    error,
+    isLoading,
+    mutate
+  }
+};
+
+export default usePosts;
 // optionally fetch posts for a specific user if a userId is provided.
 
 // If a userId is passed, it fetches posts for that specific user by constructing the URL with the query parameter userId
@@ -14,22 +31,3 @@ import fetcher from "@/libs/fetcher"; // tells SWR how to fetch data from the AP
     // isLoading, //whether the request is in loading state 
     // mutate  // manually trigger a re-fetch or update the cached data.
 // };
-
-const usePosts = (userId: string) => {
-    const fetchUrl = userId ? `/api/posts?userId=${userId}` : `/api/posts`;
-
-    const { data, 
-            error, 
-            isLoading, 
-            mutate 
-        } = useSWR(fetchUrl, fetcher);
-    
-    return{
-        data, 
-        error,
-        isLoading,
-        mutate 
-    };
-}
-
-export default usePosts;
