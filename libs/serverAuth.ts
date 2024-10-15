@@ -32,7 +32,7 @@ function exclude<User, Key extends keyof User>(
     }
 
     const userWithoutPassword = exclude(currentUser, ["hashedPassword"]);
-  return { currentUser: userWithoutPassword };
+    return { currentUser: userWithoutPassword };
 };
 
 export default serverAuth; 

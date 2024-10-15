@@ -34,7 +34,7 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse) {
             if(userId && typeof userId === "string"){
                 posts = await prisma.post.findMany({
                     where: {
-                        id: userId,
+                        userId: userId, //userID. o user'ın yazdığı postlar.
                     },
                     include: {
                         user: true,

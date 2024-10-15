@@ -10,6 +10,14 @@ interface PostFeedProps{
 const PostFeed: React.FC<PostFeedProps> = ({ userId }) => {
     
     const { data: posts = [] } = usePosts(userId);
+    console.log("userId POSTFEEDDDD:", userId)
+    console.log("POSTSSSSSSSSSSS:",posts);
+
+    if (posts.lengh === 0){
+        return(
+            <p className="text-white">No posts available.</p>
+        )
+    }
     
     return(
         <>
@@ -17,7 +25,7 @@ const PostFeed: React.FC<PostFeedProps> = ({ userId }) => {
             <PostItem 
                 userId={userId}
                 key={post.id}
-                data={post.id}/>
+                data={post}/>
         ))}
         </>
     )

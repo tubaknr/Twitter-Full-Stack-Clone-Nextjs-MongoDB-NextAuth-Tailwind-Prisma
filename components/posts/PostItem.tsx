@@ -20,7 +20,6 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId }) => {
     const loginModal = useLoginModal();
 
     const { data: currentUser } = useCurrentUser();
-    // const { data : currentUser } = useUser(userId);
 
     console.log("currentUser POSTITEM.TS:", currentUser);
     console.log("post data: ", data);

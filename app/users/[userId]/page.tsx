@@ -33,6 +33,7 @@ const UserView = ()  => {
             <Header showBackArrow label="User Profile"/>
             <UserHero userId={userId as string} />
             <UserBio userId={userId as string}/>
+            {/* <p className="text-white">{userId}</p> */}
             <PostFeed userId={userId as string} />
 
         </div>
