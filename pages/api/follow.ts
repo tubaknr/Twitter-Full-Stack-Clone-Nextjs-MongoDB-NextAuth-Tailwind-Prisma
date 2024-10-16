@@ -52,12 +52,13 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse) {
             updatedFollowingIds = updatedFollowingIds.filter(followingId => followingId !== userId);
         }
 
+        // follow / unfollow etmek İSTEYEN KULLANCIIYI GÜNCELLE
         const updatedUser = await prisma.user.update({
             where: {
                 id: currentUser.id,
             },
             data: {
-                followingIds: updatedFollowingIds,
+                followingIds: updatedFollowingIds, //takip ettiği liste
             }
         });
 
