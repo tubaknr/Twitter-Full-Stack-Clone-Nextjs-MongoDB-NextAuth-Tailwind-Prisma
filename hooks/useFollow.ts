@@ -5,6 +5,7 @@ import useUser from "./useUser";
 import axios from "axios";
 import toast from "react-hot-toast";
 
+// CLIENT SIDE HOOK
 const useFollow = (userId: string) => {
 
     // currentUser = currently logged-in user's data
@@ -23,7 +24,7 @@ const useFollow = (userId: string) => {
         const list = currentUser?.followingIds || [];
 
         return list.includes(userId);
-    }, [userId, currentUser?.followingIds]);
+    }, [userId, currentUser]);
 
 
     const toggleFollow = useCallback( async () => {
@@ -35,16 +36,24 @@ const useFollow = (userId: string) => {
         try{
             let request;
 
+            console.log("userId USEFOLLOW.TS:",userId)
             // unfollow
             if (isFollowing){
                 request = () => axios.delete('/api/follow', { data: { userId }});
+                console.log("REQUEST DEELTE:",request);
             }
             // follow
             else{
                 request = () => axios.post('/api/follow', { userId });
+                console.log("REQUEST POST:",request);
             }
 
-            await request();
+            // console.log("REQ 1: USEFOLLLOW.TS: ", request);
+
+            const response = await request();
+            console.log("RESPONSE: ", response);
+
+            console.log("REQ 2: USEFOLLLOW.TS: ", request);
 
             mutateCurrentUser(); //FOLLOW ETMEK İSTEYENİ GÜNCELLE
             mutateFetchedUser(); // follow EDİLEMK İSTENENİ GÜNCELLE

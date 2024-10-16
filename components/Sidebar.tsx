@@ -11,7 +11,7 @@ import { toast } from 'react-hot-toast';
 
 const Sidebar = () => {
     const { data: currentUser } = useCurrentUser();
-    console.log("currentUser, Sidebar.tsx :",{currentUser});
+    // console.log("currentUser, Sidebar.tsx :",{currentUser});
 
     const handleLogout = async () => {
         try{

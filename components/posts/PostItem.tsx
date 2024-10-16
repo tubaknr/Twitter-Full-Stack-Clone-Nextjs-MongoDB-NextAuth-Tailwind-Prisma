@@ -21,11 +21,11 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId }) => {
 
     const { data: currentUser } = useCurrentUser();
 
-    console.log("currentUser POSTITEM.TS:", currentUser);
-    console.log("post data: ", data);
-    console.log("post data.body: ", data.body);
-    console.log("post data.id: ", data.id);
-    console.log("post data.user: ", data.user);
+    // console.log("currentUser POSTITEM.TS:", currentUser);
+    // console.log("post data: ", data);
+    // console.log("post data.body: ", data.body);
+    // console.log("post data.id: ", data.id);
+    // console.log("post data.user: ", data.user);
     
     // if (!data || !data.user) return;
     useEffect(() => {

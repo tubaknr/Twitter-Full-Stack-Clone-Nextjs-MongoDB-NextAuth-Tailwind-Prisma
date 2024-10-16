@@ -10,8 +10,8 @@ interface PostFeedProps{
 const PostFeed: React.FC<PostFeedProps> = ({ userId }) => {
     
     const { data: posts = [] } = usePosts(userId);
-    console.log("userId POSTFEEDDDD:", userId)
-    console.log("POSTSSSSSSSSSSS:",posts);
+    // console.log("userId POSTFEEDDDD:", userId)
+    // console.log("POSTSSSSSSSSSSS:",posts);
 
     if (posts.lengh === 0){
         return(

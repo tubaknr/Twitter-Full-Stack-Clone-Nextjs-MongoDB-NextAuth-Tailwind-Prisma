@@ -27,14 +27,14 @@ const LayoutContent:React.FC<LayoutContentProps> = ({ children }) => {
 
     const { data: sessionData, status } = useSession();
 
-    console.log("sessionData:",sessionData);
+    // console.log("sessionData:",sessionData);
 
     const loginModal = useLoginModal();
     const registerModal = useRegisterModal();
 
-    if(status == "loading"){
-      console.log("LOADING app/LAYOUT.TSX");
-    }
+    // if(status == "loading"){
+    //   console.log("LOADING app/LAYOUT.TSX");
+    // }
 
     return(
     <>

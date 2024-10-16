@@ -13,9 +13,11 @@ function exclude<User, Key extends keyof User>(
     return user;
   }
 
+  // şu anki giriş yapmış olann kullanıcı
   const serverAuth = async(req: NextApiRequest, res:NextApiResponse) => {
    
     const session = await getServerSession(req, res, authOptions);
+    console.log("Session Data: SERVERAUTH ", session);
 
     if (!session?.user?.email){
         throw new Error("Session or user or email not found. serverAuth.ts");
@@ -28,7 +30,8 @@ function exclude<User, Key extends keyof User>(
     });
 
     if (!currentUser){
-        throw new Error("CurrentUser not found in prismadb. serverAuth.ts");
+        // throw new Error("CurrentUser not found in prismadb. serverAuth.ts");
+        return res.status(404).json({ error: "Current user not found. serverAuth.ts" });
     }
 
     const userWithoutPassword = exclude(currentUser, ["hashedPassword"]);

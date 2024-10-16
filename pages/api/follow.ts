@@ -4,6 +4,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 // prisma -> interact with db
 // serverAuth -> authenticate users
 
+
+// SERVER SIDE API ROUTE Follow.ts
 export default async function handler(req:NextApiRequest, res:NextApiResponse) {
 
     // follow -> POST
@@ -11,19 +13,20 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse) {
     if(req.method !== "POST" && req.method !== "DELETE"){
         return res.status(405).end();
     }
+
     try{
         // fetch the user by userId ( user wants to follow or unfollow)
         // extract userId from request query pms.
         // this is the ID of the user you want to follow or unfollow!!!!!
-        const { userId } = req.query;
-        console.log("REQ: FOLLOW.TS",req)
-        console.log("REQ.QUERY: FOLLOW.TS",req.query)
+        // const { userId } = req.query;
+        const userId = req.headers["user-id"];
+        
 
         // follow yada unfollow ETMEK İSTEYEN KULLANICI
         const { currentUser } = await serverAuth(req, res);
 
         if (!userId || typeof userId !== "string"){
-            throw new Error("Usser ID is not found or the type isnot string");
+            throw new Error("Usser ID is not found FOLLOW.TS");
         }
 
         // follow EDİLMEK İSTENEN KULLANICI
@@ -43,6 +46,7 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse) {
         // follow edilecekse
         // userId'yi following listesine ekle
         if(req.method === "POST"){
+            console.log("POSTTAYIZZZZ")
             updatedFollowingIds.push(userId); //takip etmek istenilen ID.
         }
 
