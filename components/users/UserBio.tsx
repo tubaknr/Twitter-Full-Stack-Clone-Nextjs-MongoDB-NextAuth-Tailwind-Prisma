@@ -14,7 +14,7 @@ interface UserBioProps{
 const UserBio: React.FC<UserBioProps> = ({ userId }) => {
     
     const { data: currentUser } = useCurrentUser();
-    const { data: fetchedUser } = useUser(userId);
+    const { data: fetchedUser } = useUser(userId); //pages/api/users/[userId].ts çalıştırılır.  return res.status(200).json({ ...existingUser, followersCount}); döner.
 
     const editModal = useEditModal();
 
