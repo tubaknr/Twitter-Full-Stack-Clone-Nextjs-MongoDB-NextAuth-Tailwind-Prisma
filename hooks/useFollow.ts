@@ -52,7 +52,6 @@ const useFollow = (userId: string) => {
 
             const response = await request();
             console.log("RESPONSE: ", response);
-
             console.log("REQ 2: USEFOLLLOW.TS: ", request);
 
             mutateCurrentUser(); //FOLLOW ETMEK İSTEYENİ GÜNCELLE
