@@ -1,21 +1,24 @@
 "use client";
 import { useParams } from "next/navigation";
 import { ClipLoader } from "react-spinners";
-import usePost from "@/hooks/usePost";
-import Header from "@/components/Header";
-import PostItem from "@/components/posts/PostItem";
-import Form from "@/components/Form";
+import usePost from "@/app/hooks/usePost";
+import Header from "@/app/components/Header";
+import PostItem from "@/app/components/posts/PostItem";
+import Form from "@/app/components/Form";
 
 const PostView = () => {
 
     const { postId } = useParams();
-    console.log(postId)
-    const { data: fetchedPost, isLoading } = usePost(postId as string);
-    console.log("fetchedPost:",fetchedPost);
+    console.log("postId PAGE.TSX:", postId);
+
+    const { data: fetchedPost, isLoading } = usePost(postId as string); //!!!!
+    console.log("fetchedPost PAGE.TSX [POSTID]:",fetchedPost);
 
     if (isLoading || !fetchedPost){
         return(
+            
             <div className="flex justify-center items-center h-full">
+                <p className="text-white">Loading Post [postId]/page.tsxt</p>
                 <ClipLoader color="lightblue" size={80} />
             </div>
         );

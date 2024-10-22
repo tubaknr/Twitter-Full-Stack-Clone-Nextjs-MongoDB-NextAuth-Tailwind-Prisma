@@ -1,17 +1,17 @@
 "use client";
 
 import type { Metadata } from "next";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import "./globals.css";
-import Sidebar from "@/components/Sidebar";
-import FollowBar from "@/components/FollowBar";
-import LoginModal from "@/components/modals/LoginModal";
-import useLoginModal from "@/hooks/useLoginModal";
-import useRegisterModal from "@/hooks/useRegisterModal";
-import RegisterModal from "@/components/modals/RegisterModal";
+import Sidebar from "@/app/components/Sidebar";
+import FollowBar from "@/app/components/FollowBar";
+import LoginModal from "@/app/components/modals/LoginModal";
+import useLoginModal from "@/app/hooks/useLoginModal";
+import useRegisterModal from "@/app/hooks/useRegisterModal";
+import RegisterModal from "@/app/components/modals/RegisterModal";
 import { Toaster } from "react-hot-toast";
 import { SessionProvider, useSession } from "next-auth/react";
-import EditModal from "@/components/modals/EditModal";
+import EditModal from "@/app/components/modals/EditModal";
 
 
 interface LayoutProps{

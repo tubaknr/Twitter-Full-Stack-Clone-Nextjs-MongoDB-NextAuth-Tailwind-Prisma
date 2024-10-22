@@ -1,11 +1,11 @@
 "use client"
-import Header from "@/components/Header";
-import useUser from "@/hooks/useUser";
+import Header from "@/app/components/Header";
+import useUser from "@/app/hooks/useUser";
 import { ClipLoader } from "react-spinners";
-import UserHero from "@/components/users/UserHero";
+import UserHero from "@/app/components/users/UserHero";
 import { useParams } from 'next/navigation';
-import UserBio from "@/components/users/UserBio";
-import PostFeed from "@/components/posts/PostFeed";
+import UserBio from "@/app/components/users/UserBio";
+import PostFeed from "@/app/components/posts/PostFeed";
 
 
 const UserView = ()  => {
@@ -13,7 +13,7 @@ const UserView = ()  => {
     const { userId } = useParams();
     // console.log("userId:",userId);
     const { data: fetchedUser, isLoading } = useUser(userId as string);
-
+    console.log("fetchedUser: USERS/[USERID]/PAGE.TSX: ",fetchedUser);
     if (isLoading || !fetchedUser){
         return(
             <div 
