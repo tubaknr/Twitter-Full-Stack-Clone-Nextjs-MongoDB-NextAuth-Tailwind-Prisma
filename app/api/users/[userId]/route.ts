@@ -4,13 +4,14 @@ import prisma from '@/app/lib/prismaDb';
 import { NextRequest, NextResponse } from "next/server";
 
 import { useRouter } from 'next/router';
-export async function GET(req: NextRequest) {
+export async function GET(req: NextRequest, { params }: { params: { userId: string } }) {
 
     try{
     //     const router = useRouter();
     //     const { userId } = router.query; 
-        const { searchParams } = new URL(req.url);
-        const userId = searchParams.get("userId");
+        // const { searchParams } = new URL(req.url);
+        // const userId = searchParams.get("userId");
+        const { userId } = params;
         console.log("userId APP/USERS/[USERID]/ROUTE.TS:  ",userId)
 
         if (!userId || typeof userId !== 'string'){

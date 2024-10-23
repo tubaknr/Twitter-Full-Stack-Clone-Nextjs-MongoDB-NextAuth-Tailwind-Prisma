@@ -2,15 +2,19 @@ import { NextApiResponse, NextApiRequest } from "next";
 import prisma from "@/app/lib/prismaDb";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
+export async function GET(req: NextRequest, { params }: { params: {postId: string} }) {
     
-    try{
-        const { searchParams } = new URL(req.url);
-        const postId = searchParams.get("postId");
+    const { postId } = params; //CORRECT
+
+    console.log("POSTID [POSTID]/ROUTES.TS: ", postId);//CORRECT
 
         if (!postId || typeof postId !== 'string'){
-            throw new Error("Invalid ID! app/posts/[POSTID].TS");
+            return NextResponse.json({ error: "Invalid ID! app/posts/[postId]/route.ts" }, { status: 400 });
         }
+
+    try{
+        // const { searchParams } = new URL(req.url);
+        // const postId = searchParams.get("postId");
 
         const post = await prisma.post.findUnique({
             where:{

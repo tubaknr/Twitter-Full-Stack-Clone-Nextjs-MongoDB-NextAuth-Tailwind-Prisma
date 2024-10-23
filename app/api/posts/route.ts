@@ -9,14 +9,14 @@ export async function POST(req: NextRequest) {
         
         const { body } = await req.json(); //BODY
 
-        const post = await prisma.post.create({
+        const posts = await prisma.post.create({
             data: {
                 body: body,
                 userId: currentUser.id,
             }
         }) ;
 
-        return NextResponse.json(post);
+        return NextResponse.json(posts);
         }
         catch(error){
             return NextResponse.json({ error: "Sth went wrong. app/posts/route.ts i POST req. "}, { status: 400 });
@@ -98,6 +98,7 @@ export async function GET(req: NextRequest) {
         }
 
         return NextResponse.json(posts);
+        
     } catch (error) {
         console.error(error, " : posts/route.ts");
         return NextResponse.json({ error: "Failed to fetch posts. APP/POSTS/ROUTE.TS" }, { status: 400 });

@@ -4,8 +4,9 @@ import fetcher from "@/app/lib/fetcher";
 
 //data ya bakacak, ihtiyaç duyarsa tekrar çekecek.
 const usePost = (postId: string) => {
-    console.log("usePOST:", postId); //!!!!
-    const { data, error, isLoading, mutate } = useSWR(postId ? `/api/users/${postId}` : null, fetcher);
+    // console.log("usePOST POSTID:", postId); //CORRECT
+
+    const { data, error, isLoading, mutate } = useSWR(postId ? `/api/posts/${postId}` : null, fetcher);
 
     return { data, error, isLoading, mutate };
 }
