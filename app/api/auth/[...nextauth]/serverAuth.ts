@@ -3,6 +3,7 @@ import prisma from '../../../lib/prismaDb';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { NextRequest, NextResponse } from "next/server";
 import { NextApiRequest, NextApiResponse } from "next";
+import { useSession, signIn, signOut } from "next-auth/react"
 
 function exclude<User, Key extends keyof User>(
     user: User,
@@ -17,9 +18,11 @@ function exclude<User, Key extends keyof User>(
   // şu anki giriş yapmış olan kullanıcı
   export const serverAuth = async(req: NextApiRequest, res: NextApiResponse) => {
    
-    const session = await getServerSession(req, res, authOptions);
+    const { data: session } = useSession();
     console.log("Session Data: SERVERAUTH.ts ", session);
-
+    console.log(!session.user);
+    console.log(!session.user.email);
+    
     if (!session || !session.user || !session.user.email){
         throw new Error("Session or user or email not found. serverAuth.ts");
     }

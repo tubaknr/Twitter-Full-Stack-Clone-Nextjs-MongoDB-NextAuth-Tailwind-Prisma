@@ -14,7 +14,6 @@ const PostView = () => {
 
     // console.log(pathname);
     const postId = pathname.split('/').pop();//CORRECT
-
     // console.log("postId PAGE.TSX:", postId); //CORRECT
 
     const { data: fetchedPost, isLoading } = usePost(postId); //CORRECT
@@ -25,10 +24,10 @@ const PostView = () => {
             <>
                 <Header label="Tweet" showBackArrow/>
                 
-            <div className="flex justify-center items-center h-full">
-                <p className="text-white">Loading Post [postId]/page.tsxt</p>
-                <ClipLoader color="lightblue" size={80} />
-            </div>
+                <div className="flex justify-center items-center h-full">
+                    <p className="text-white">Loading Post [postId]/page.tsxt</p>
+                    <ClipLoader color="lightblue" size={80} />
+                </div>
             </>
         );
     };

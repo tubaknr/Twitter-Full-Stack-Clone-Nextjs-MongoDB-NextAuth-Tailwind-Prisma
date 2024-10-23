@@ -3,28 +3,31 @@ import { NextApiRequest, NextApiResponse } from "next";
 import prisma from '@/app/lib/prismaDb';
 import { NextRequest, NextResponse } from "next/server";
 
-import { useRouter } from 'next/router';
+
 export async function GET(req: NextRequest, { params }: { params: { userId: string } }) {
+    
+    const { userId } = params;
+    console.error("userId APP/USERS/[USERID]/ROUTE.TS:  ",userId)
+
+    if (!userId || typeof userId !== 'string'){
+        return NextResponse.json({ error: "Invalid ID! app/users/[USERID]/ROUTE.TS"}, { status: 400 });
+    }
 
     try{
-    //     const router = useRouter();
-    //     const { userId } = router.query; 
-        // const { searchParams } = new URL(req.url);
-        // const userId = searchParams.get("userId");
-        const { userId } = params;
-        console.log("userId APP/USERS/[USERID]/ROUTE.TS:  ",userId)
-
-        if (!userId || typeof userId !== 'string'){
-            throw new Error("Invalid ID! app/users/[USERID]/ROUTE.TS");
-        }
 
         const existingUser = await prisma.user.findUnique({
-            where:
-            {
+            where:{
                 id: userId,
-            }
+            },
         });
 
+        if(!existingUser){
+            console.log("EXISTING USER NOT FOUND. USERS/[USERID]/ROUTE.TS");
+            return NextResponse.json({ error: "USER not found. APP/USERS/[USERID]/ROUTE.TS"}, {status: 404});
+        }
+        console.log("EXITINGUSER USERS/[USERID]/ROUTE.TS:", existingUser)
+
+        
         const followersCount = await prisma.user.count({
             where:{
                 followingIds: {
