@@ -17,7 +17,7 @@ const PostView = () => {
     // console.log("postId PAGE.TSX:", postId); //CORRECT
 
     const { data: fetchedPost, isLoading } = usePost(postId); //CORRECT
-    console.log("fetchedPost PAGE.TSX [POSTID]:",fetchedPost);//CORRECT
+    console.log("fetchedPostttttttt PAGE.TSX [POSTID]:",fetchedPost);//CORRECT
 
     if (isLoading || !fetchedPost){
         return(
