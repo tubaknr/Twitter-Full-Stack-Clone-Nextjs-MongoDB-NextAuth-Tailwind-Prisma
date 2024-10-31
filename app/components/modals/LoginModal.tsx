@@ -28,9 +28,10 @@ const LoginModal = () => {
     const onSubmit = useCallback(async () => {
         try{
             setIsLoading(true);
-            
-            await signIn('credentials', {email, password});
-
+            console.log("LOGINMODAL 1");
+            const resp = await signIn('credentials', {email, password});
+            console.log("LOGINMODAL 2");
+            console.log("RESP: LOGINMODAL: ", resp);
             loginModal.onClose();
 
         }catch(error){
@@ -81,7 +82,7 @@ const LoginModal = () => {
             disabled={isLoading}
             isOpen={loginModal.isOpen}
             title="Login"
-            actionLabel="Sign in"
+            actionLabel="Sign in" 
             onClose={loginModal.onClose}
             onSubmit={onSubmit}
             body={bodyContent}

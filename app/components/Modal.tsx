@@ -74,8 +74,8 @@ const Modal: React.FC<ModalProps> = ({
                         h-full
                         lg:h-auto">
 
-                            {/* Content */}
 
+                            {/* Content */}
                             <div className="
                                 h-full
                                 lg:h-auto
@@ -88,8 +88,10 @@ const Modal: React.FC<ModalProps> = ({
                                 bg-black
                                 outline-none
                                 focus:outline-none">
-                                    {/* Header */}
-                            
+
+
+
+                                {/* Header */}
                                 <div className="
                                     flex
                                     items-center
@@ -112,14 +114,16 @@ const Modal: React.FC<ModalProps> = ({
                                             <AiOutlineClose size={20} /> 
                                         </button>
                                 </div>
+
+
                                 {/* Body */}
-                                
                                 <div className="relative p-10 flex-auto">
                                     {body}
                                 </div>
+
+
                                 
                                 {/* Footer */}
-
                                 <div className="flex flex-col gap-2 p-10">
                                     <Button disabled={disabled} 
                                             label={actionLabel} 
@@ -127,9 +131,11 @@ const Modal: React.FC<ModalProps> = ({
                                             fullWidth 
                                             large 
                                             onClick={handleSubmit}
-                                        />
-                                        {footer}
+                                    />
+                                    {footer}
                                 </div>
+
+
                         </div>
                     </div>
             </div>

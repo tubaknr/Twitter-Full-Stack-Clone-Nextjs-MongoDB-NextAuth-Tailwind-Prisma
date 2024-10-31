@@ -45,6 +45,7 @@ const LayoutContent:React.FC<LayoutContentProps> = ({ children }) => {
           {status === "unauthenticated" && loginModal.isOpen && <LoginModal />}
           
           {(
+            
             <>
           <EditModal />
           <div className="h-screen bg-black">
@@ -72,12 +73,15 @@ const LayoutContent:React.FC<LayoutContentProps> = ({ children }) => {
 }    
 
 const Layout: React.FC<LayoutProps> = ({children, session}) => {
+
   return(
     <html lang="en">
       <body>
       
         <SessionProvider session={session}>
-          <LayoutContent>{children}</LayoutContent>
+            <LayoutContent>
+                {children}
+            </LayoutContent>
         </SessionProvider>
           
           </body>
