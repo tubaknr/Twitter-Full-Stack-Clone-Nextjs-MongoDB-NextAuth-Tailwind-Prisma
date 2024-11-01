@@ -1,6 +1,6 @@
 "use client";
 import useSWR from "swr";
-import fetcher from "@/app/lib/fetcher";
+import fetcher from "@/lib/fetcher";
 
 //data ya bakacak, ihtiyaç duyarsa tekrar çekecek.
 const usePost = (postId: string) => {

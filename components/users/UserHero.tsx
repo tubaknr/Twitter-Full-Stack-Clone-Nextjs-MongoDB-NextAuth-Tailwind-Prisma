@@ -1,4 +1,4 @@
-import useUser from "@/app/hooks/useUser";
+import useUser from "@/hooks/useUser";
 import Image from "next/image";
 import Avatar from "../Avatar";
 

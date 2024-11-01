@@ -1,11 +1,12 @@
-import useCurrentUser from "@/app/hooks/useCurrentUser";
-import useUser from "@/app/hooks/useUser";
+import useCurrentUser from "@/hooks/useCurrentUser";
+import useUser from "@/hooks/useUser";
 import { format } from "date-fns";
 import { useMemo } from "react";
 import Button from "../Button";
 import { BiCalendar } from 'react-icons/bi';
-import useEditModal from "@/app/hooks/useEditModal";
-import useFollow from "@/app/hooks/useFollow";
+import useEditModal from "@/hooks/useEditModal";
+import useFollow from "@/hooks/useFollow";
+import { usePathname } from 'next/navigation';
 
 interface UserBioProps{
     userId: string;
@@ -14,9 +15,15 @@ interface UserBioProps{
 const UserBio: React.FC<UserBioProps> = ({ userId }) => {
     
     const { data: currentUser } = useCurrentUser();
-    
-    const { data: fetchedUser } = useUser(userId); //pages/api/users/[userId].ts çalıştırılır.  
-    //return res.status(200).json({ ...existingUser, followersCount}); döner.
+    let pathname = usePathname();//CORRECT
+    let fetchedUserId = pathname.split('/').pop();//CORRECT
+    console.log("user ıd:", fetchedUserId);
+
+    // ÇEKEMİYOR
+    const { data: fetchedUser, isLoading } = useUser(fetchedUserId);
+
+    console.log("fetchedUser USERBIOO from useUser : ", fetchedUser);
+
 
     const editModal = useEditModal();
 

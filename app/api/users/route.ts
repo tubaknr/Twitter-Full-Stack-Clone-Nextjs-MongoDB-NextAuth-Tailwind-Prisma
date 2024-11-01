@@ -1,11 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import prisma from '@/app/lib/prismaDb';
+import { db } from '@/lib/db';
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
   
     try{
-        const users = await prisma.user.findMany({
+        const users = await db.user.findMany({
             orderBy: {
                 createdAt: 'desc' //en yeni kaydolan kullanıcı en yukarıda
             }

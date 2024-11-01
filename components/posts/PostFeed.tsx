@@ -1,5 +1,5 @@
 "use client";
-import usePosts from "@/app/hooks/usePosts";
+import usePosts from "@/hooks/usePosts";
 import PostItem from "./PostItem";
 
 

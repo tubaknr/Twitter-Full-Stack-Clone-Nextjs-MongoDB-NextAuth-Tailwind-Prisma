@@ -1,7 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import serverAuth from "@/app/lib/serverAuth";
-import prisma from "@/app/lib/prismaDb";
+import serverAuth from "@/lib/serverAuth";
+import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
+import { getCurrentUser } from "@/lib/session";
 
 async function handleLike(req: Request, method: string){
 
@@ -9,20 +10,20 @@ async function handleLike(req: Request, method: string){
         const { postId } = await req.json();
         console.log("POSTID: LIKE.TS: ", postId);
 
-        const authResult = await serverAuth(req);
+        const authResult = await getCurrentUser();
 
         if (!authResult || !authResult.currentUser){
             return NextResponse.json({ error: "Current user not found. like.ts" }, { status: 404 })
         }
 
-        const { currentUser } = authResult;
+        const currentUser  = authResult;
         console.log("CURRENTUSER, LIKE.TS: ", currentUser);
         
         if (!postId || typeof postId!=="string"){
             throw new Error("Invalid ID LIKE.TS");
         }
 
-        const post = await prisma.post.findUnique({
+        const post = await db.post.findUnique({
             where:
             {
                 id: postId,
@@ -44,7 +45,7 @@ async function handleLike(req: Request, method: string){
             updatedLikedIds = updatedLikedIds.filter((likedId) => likedId !== currentUser.id);
         }
 
-        const updatedPost = await prisma.post.update({
+        const updatedPost = await db.post.update({
             where: {
                 id: postId,
             },

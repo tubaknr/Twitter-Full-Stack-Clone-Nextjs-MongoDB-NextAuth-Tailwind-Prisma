@@ -1,6 +1,7 @@
-import serverAuth from "@/app/lib/serverAuth";
-import prisma from "@/app/lib/prismaDb";
+import serverAuth from "@/lib/serverAuth";
+import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
+import { getCurrentUser } from "@/lib/session";
 // prisma -> interact with db
 // serverAuth -> authenticate users
 
@@ -20,13 +21,13 @@ async function handleFollowUnfollow(req: Request, method: string) {
         const { userId } = await req.json();
 
         // follow yada unfollow ETMEK İSTEYEN KULLANICI
-        const authResult = await serverAuth(req);
+        const authResult = await getCurrentUser();
 
         if (!authResult || !authResult.currentUser){
             return NextResponse.json({ error: "Current user not found. follow.ts" }, { status: 404 })
         }
 
-        const { currentUser } = authResult;
+        const currentUser = authResult;
         console.log("CURRENTUSER, FOLLOW.TS: ", currentUser);
 
 
@@ -35,7 +36,7 @@ async function handleFollowUnfollow(req: Request, method: string) {
         }
 
         // follow EDİLMEK İSTENEN KULLANICI
-        const user = await prisma.user.findUnique({
+        const user = await db.user.findUnique({
             where: {
                 id: userId, 
             },
@@ -61,7 +62,7 @@ async function handleFollowUnfollow(req: Request, method: string) {
         }
 
         // follow / unfollow etmek İSTEYEN KULLANCIIYI GÜNCELLE
-        const updatedUser = await prisma.user.update({
+        const updatedUser = await db.user.update({
             where: {
                 id: currentUser.id,
             },

@@ -1,10 +1,10 @@
 "use client"
-import Header from "@/app/components/Header";
-import useUser from "@/app/hooks/useUser";
+import Header from "@/components/Header";
+import useUser from "@/hooks/useUser";
 import { ClipLoader } from "react-spinners";
-import UserHero from "@/app/components/users/UserHero";
-import UserBio from "@/app/components/users/UserBio";
-import PostFeed from "@/app/components/posts/PostFeed";
+import UserHero from "@/components/users/UserHero";
+import UserBio from "@/components/users/UserBio";
+import PostFeed from "@/components/posts/PostFeed";
 import { usePathname } from 'next/navigation';
 
 const UserView = ()  => {
@@ -19,7 +19,7 @@ const UserView = ()  => {
     
     console.log("fetchedUser: USERS/[USERID]/PAGE.TSX: ",fetchedUser);
     
-    if (isLoading || !fetchedUser){
+    if (isLoading){
         return(
             <div 
                 className="

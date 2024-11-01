@@ -1,4 +1,4 @@
-import prisma from "@/app/lib/prismaDb";
+import { db } from "@/lib/db";
 import bcrypt from 'bcrypt';
 import { NextRequest, NextResponse } from "next/server";
 
@@ -16,7 +16,7 @@ export async function POST(req: NextRequest){
 
         console.log("password is hashed. Register.ts");
 
-        const user = await prisma.user.create({
+        const user = await db.user.create({
             data: {
                 email, 
                 username, 

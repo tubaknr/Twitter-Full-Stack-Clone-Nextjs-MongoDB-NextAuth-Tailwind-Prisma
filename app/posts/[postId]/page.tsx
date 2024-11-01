@@ -1,7 +1,7 @@
 "use client";
 import { useParams } from "next/navigation";
 import { ClipLoader } from "react-spinners";
-import usePost from "@/app/hooks/usePost";
+import usePost from "@/hooks/usePost";
 import Header from "@/app/components/Header";
 import PostItem from "@/app/components/posts/PostItem";
 import Form from "@/app/components/Form";

@@ -1,6 +1,7 @@
-import serverAuth from "@/app/lib/serverAuth";
-import prisma from "@/app/lib/prismaDb";
+import serverAuth from "@/lib/serverAuth";
+import { db } from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
+import { getCurrentUser } from "@/lib/session";
 
 export async function PATCH(req: NextRequest){
     try{
@@ -13,18 +14,18 @@ export async function PATCH(req: NextRequest){
         }
         
         //get current user
-        const authResult = await serverAuth(req);
+        const authResult = await getCurrentUser();
 
         if (!authResult || !authResult.currentUser){
             return NextResponse.json({ error: "Current user not found. edit.ts" }, { status: 404 })
         }
 
-        const { currentUser } = authResult;
+        const currentUser = authResult;
         console.log("CURRENTUSER, EDİT.TS: ", currentUser);
         
 
         // update the user
-        const updatedUser = await prisma.user.update({
+        const updatedUser = await db.user.update({
             where: {
                 id: currentUser.id
             },

@@ -1,7 +1,7 @@
 "use client";
 import useSWR from 'swr';
 
-import fetcher from '@/app/lib/fetcher'; // tells SWR how to fetch data from the API.
+import fetcher from '@/lib/fetcher'; // tells SWR how to fetch data from the API.
 
 const usePosts = (userId?: string) => {
   

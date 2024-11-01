@@ -1,13 +1,13 @@
 "use client";
-import useCurrentUser from "@/app/hooks/useCurrentUser";
-import useLoginModal from "@/app/hooks/useLoginModal";
+import useCurrentUser from "@/hooks/useCurrentUser";
+import useLoginModal from "@/hooks/useLoginModal";
 import { useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { formatDistanceToNowStrict } from "date-fns";
 import { AiOutlineMessage, AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import Avatar from "../Avatar";
 import { useEffect } from 'react';
-import useLike from "@/app/hooks/useLike";
+import useLike from "@/hooks/useLike";
 
 interface PostItemProps {
     data: Record<string, any>;

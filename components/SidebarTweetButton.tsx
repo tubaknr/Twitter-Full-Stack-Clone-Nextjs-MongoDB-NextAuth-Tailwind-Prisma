@@ -2,7 +2,7 @@
 
 import { FaFeather } from "react-icons/fa";
 import { useRouter } from "next/navigation";
-import useLoginModal from "@/app/hooks/useLoginModal";
+import useLoginModal from "@/hooks/useLoginModal";
 import { useCallback } from "react";
 
 const SidebarTweetButton = () => {

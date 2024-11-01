@@ -1,17 +1,21 @@
-"use client";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import prisma from "@/app/lib/prismaDb";
+import { db } from "@/lib/db";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import bcrypt from 'bcrypt';
 import CredentialsProvider from "next-auth/providers/credentials";
 
 
 export const authOptions: NextAuthOptions = {
-    adapter: PrismaAdapter(prisma),
-    
+    adapter: PrismaAdapter(db as any),
+    session: {
+        strategy: 'jwt',
+    },  
+    pages: {
+        signIn: "/",
+    },
     providers: [
         CredentialsProvider({
-            id: 'credentials',
+            // id: 'credentials',
             name: 'Credentals',
             credentials: {
                 email: { 
@@ -29,7 +33,7 @@ export const authOptions: NextAuthOptions = {
                     throw new Error(" Email and password required. ...Nextauth");
                 }
 
-                const user = await prisma.user.findUnique({
+                const user = await db.user.findUnique({
                     where: {
                         email: credentials.email
                     }
@@ -41,7 +45,7 @@ export const authOptions: NextAuthOptions = {
                     
                 }
 
-                console.log("User found. Password s checking... NextAuth.");
+                console.log("User FOUNDDDDDD. Password s checking... NextAuth.");
 
                 const isCorrectPassword = await bcrypt.compare(
                     credentials.password,
@@ -60,17 +64,42 @@ export const authOptions: NextAuthOptions = {
 
         })
     ],//end of providers array
-    debug: process.env.NODE_ENV === 'development',
-    session: {
-        strategy: 'jwt',
-    },    
+    debug: process.env.NODE_ENV === 'development' || true,  
     secret: process.env.NEXTAUTH_SECRET,
     jwt: {
         secret: process.env.NEXTAUTH_JWT_SECRET,
     },
+    callbacks: {
+        async session({ token, session }) {
+          if (token) {
+            session.user.id = token.id
+            session.user.name = token.name
+            session.user.email = token.email
+        }
+    
+          return session
+        },
+        async jwt({ token, user }) {
+          const dbUser = await db.user.findFirst({
+            where: {
+              email: token.email,
+            },
+          })
+    
+          if (!dbUser) {
+            if (user) {
+              token.id = user?.id
+            }
+            return token
+          }
+    
+          return {
+            id: dbUser.id,
+            name: dbUser.name,
+            email: dbUser.email,
+            picture: dbUser.image,
+          }
+        }
+    }
 };
 
-// export default NextAuth(authOptions);
-
-const handler = NextAuth(authOptions);
-export { handler as GET, handler as POST};

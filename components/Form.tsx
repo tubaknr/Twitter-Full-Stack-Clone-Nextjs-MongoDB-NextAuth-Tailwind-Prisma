@@ -1,8 +1,8 @@
 "use client";
-import useCurrentUser from "@/app/hooks/useCurrentUser";
+import useCurrentUser from "@/hooks/useCurrentUser";
 import LoginModal from "./modals/LoginModal";
 import RegisterModal from "./modals/RegisterModal";
-import usePosts from "@/app/hooks/usePosts";
+import usePosts from "@/hooks/usePosts";
 import { useCallback, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
