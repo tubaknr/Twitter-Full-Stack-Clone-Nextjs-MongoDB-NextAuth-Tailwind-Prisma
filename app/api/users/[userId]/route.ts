@@ -39,9 +39,6 @@ export async function GET(req: NextRequest, { params }: { params: { userId: stri
             }
         });
 
-        // return new Response(JSON.stringify({existingUser, followersCount}), { status: 200 });
-        // ;
-
         return new Response(JSON.stringify({ existingUser, followersCount }), { status: 200 });
 
     }catch(error){

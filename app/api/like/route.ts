@@ -16,7 +16,7 @@ async function handleLike(req: Request, method: string){
             return NextResponse.json({ error: "Current user not found. like.ts" }, { status: 404 })
         }
 
-        const currentUser  = authResult;
+        const currentUser = authResult;
         console.log("CURRENTUSER, LIKE.TS: ", currentUser);
         
         if (!postId || typeof postId!=="string"){

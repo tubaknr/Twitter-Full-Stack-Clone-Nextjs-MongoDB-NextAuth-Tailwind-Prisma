@@ -27,7 +27,7 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId }) => {
     const { hasLiked, toggleLike } = useLike({ postId: data.id, userId: userId});
 
 
-    useEffect(() => {
+    useEffect(() => { // do AFTER RENDER
         // Check if data and user id are defined
         if (data && data.user && data.user.id) {
             console.log(`User ID POSTITEM: ${data.user.id}`);
@@ -37,7 +37,7 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId }) => {
     }, [data]);
 
     // go to user
-    const goToUser = useCallback((event: any) => {
+    const goToUser = useCallback((event: any) => { //cache a function definition between re-renders
         event.stopPropagation();
         router.push(`/users/${data.user.id}`);
     },
@@ -144,9 +144,9 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId }) => {
                                     cursor-pointer
                                     transition
                                     hover:text-red-500">
-                                    <LikeIcon size={20}/>
+                                    <LikeIcon size={20} color={hasLiked ? "red" : ""} />
                                     <p>
-                                        {data.comments?.length || 0}
+                                        {data.likedIds.length}
                                     </p>
                                 </div>
 

@@ -15,6 +15,7 @@ export async function POST(req: NextRequest) {
         }
         const { user } = session;
 
+        //GELEN URL = "api/posts"
         const { body } = await req.json(); //BODY
 
         const posts = await db.post.create({

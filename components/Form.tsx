@@ -8,6 +8,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import Button from "./Button";
 import Avatar from "./Avatar";
+import usePost from "@/hooks/usePost";
 
 
 interface FormProps{
@@ -23,6 +24,7 @@ const Form: React.FC<FormProps> = ({ isComment, placeholder, postId }) => {
 
     const { data: currentUser } = useCurrentUser();
     const { mutate: mutatePosts } = usePosts(); 
+    const { mutate: mutatePost } = usePost(postId as string);
 
     const [body, setBody] = useState("");
     const [isLoading, setIsLoading] = useState(false);
@@ -31,12 +33,18 @@ const Form: React.FC<FormProps> = ({ isComment, placeholder, postId }) => {
     const onSubmit = useCallback(async () => {
         try{
             setIsLoading(true);
-            await axios.post("/api/posts", {body});
+
+            // comment ise api/comments/ de bor comment oluştur. değilse normal post olarak yayınla.
+            const url = isComment ? "/api/comments?postId=" + postId : "api/posts";
+        
+            const resp = await axios.post(url, {body});
+            console.log("RESP COMMENT-POST FORM.TSX! :  ",resp);
 
             toast.success("Tweet created successfully.");
 
             setBody('');
             mutatePosts();
+            mutatePost();
 
         }catch(error){
             toast.error("Something went wrong.");
@@ -44,7 +52,7 @@ const Form: React.FC<FormProps> = ({ isComment, placeholder, postId }) => {
         }finally{
             setIsLoading(false);
         }
-    }, [body, mutatePosts]);
+    }, [body, mutatePosts, mutatePost]);
 
 
 
