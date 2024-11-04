@@ -20,7 +20,33 @@ export async function POST(req: NextApiRequest, res: NextResponse){
                 userId: currentUser.id,
                 postId,
             }
-        })
+        });
+        
+        try{
+            const post = await db.post.findUnique({
+             where:{
+                 id: postId,
+             }
+            });
+
+            if(post?.userId){
+                 await db.notification.create({
+                     data:{
+                         body: 'Someone replied to your tweet!',
+                         userId: post.userId,
+                     },
+                 });
+
+                 await db.user.update({
+                     where:{
+                         id: post.userId,
+                     },
+                     data: {
+                         hasNotification: true,
+                     },
+                 });
+            } 
+
 
         return NextResponse.json(comment, { status: 200 });
     }catch(error){
