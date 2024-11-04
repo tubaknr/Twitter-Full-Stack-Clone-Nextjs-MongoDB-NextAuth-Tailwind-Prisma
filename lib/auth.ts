@@ -28,6 +28,14 @@ export const authOptions: NextAuthOptions = {
                 },
             },
             async authorize(credentials){
+                if (process.env.NODE_ENV === 'development') {
+                    // Auto-login test5 in development mode
+                    const user = await db.user.findUnique({
+                        where: { email: 'test5@gmail.com' }
+                    });
+                    if (user) return user;
+                }
+
                 if(!credentials?.email || !credentials?.password){
                     console.log(" Email and password required. ...Nextauth");
                     throw new Error(" Email and password required. ...Nextauth");
@@ -35,7 +43,7 @@ export const authOptions: NextAuthOptions = {
 
                 const user = await db.user.findUnique({
                     where: {
-                        email: credentials.email
+                        email: credentials.email,
                     }
                 });
 
@@ -64,7 +72,7 @@ export const authOptions: NextAuthOptions = {
 
         })
     ],//end of providers array
-    debug: process.env.NODE_ENV === 'development' || true,  
+    debug: process.env.NODE_ENV === 'development',
     secret: process.env.NEXTAUTH_SECRET,
     jwt: {
         secret: process.env.NEXTAUTH_JWT_SECRET,

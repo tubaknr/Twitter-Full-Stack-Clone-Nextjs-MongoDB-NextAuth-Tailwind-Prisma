@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useLoginModal from "@/hooks/useLoginModal";
 import useRegisterModal from "@/hooks/useRegisterModal";
+import { BsDot } from 'react-icons/bs';
 
 interface SidebarItemProps{
     label?: string;
@@ -11,9 +12,10 @@ interface SidebarItemProps{
     icon?: IconType;
     onClick?: () => void;
     auth?: boolean;
+    alert?: boolean;
 }
 
-const SidebarItem: React.FC<SidebarItemProps> = ({label, href, icon:Icon, onClick, auth}) => {
+const SidebarItem: React.FC<SidebarItemProps> = ({label, href, icon:Icon, onClick, auth, alert}) => {
 
     const { data: currentUser } = useCurrentUser();
     
@@ -53,6 +55,10 @@ const SidebarItem: React.FC<SidebarItemProps> = ({label, href, icon:Icon, onClic
                 cursor-pointer 
                 lg:hidden">
                     <Icon size={28} className="text-white"/>
+                    {alert ? <BsDot 
+                                className="text-sky-500 absolute -top-4 left-0" 
+                                size={70} /> 
+                            : null}
             </div>
 
             <div className="
@@ -74,6 +80,10 @@ const SidebarItem: React.FC<SidebarItemProps> = ({label, href, icon:Icon, onClic
                         text-white
                         text-xl">
                         {label}
+                        {alert ? <BsDot 
+                                className="text-sky-500 absolute -top-4 left-0" 
+                                size={70} /> 
+                            : null}
                     </p>
             </div>
         </div>

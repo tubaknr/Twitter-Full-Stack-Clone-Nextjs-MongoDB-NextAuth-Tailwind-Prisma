@@ -33,7 +33,8 @@ const Sidebar = () => {
             label: 'Notifications',
             href: '/notifications',
             icon: BsBellFill,
-            auth: true // true->this route is protected->if log out you cant go to the Notifications.
+            auth: true, // true->this route is protected->if log out you cant go to the Notifications.
+            alert: currentUser?.hasNotification,
         },
         {
             label: 'Profile',
@@ -56,7 +57,8 @@ const Sidebar = () => {
                             href={item.href}
                             label={item.label}
                             icon={item.icon}
-                            auth={item.auth}/>
+                            auth={item.auth}
+                            alert={item.alert}/>
                         ))}
                         
                         {currentUser && ( 
