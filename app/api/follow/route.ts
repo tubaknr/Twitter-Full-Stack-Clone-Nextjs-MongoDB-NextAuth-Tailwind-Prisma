@@ -53,6 +53,28 @@ async function handleFollowUnfollow(req: Request, method: string) {
         // userId'yi following listesine ekle
         if(method === "POST"){
             updatedFollowingIds.push(userId); //takip etmek istenilen ID.
+
+            try{
+
+                await db.notification.create({
+                    data: {
+                        body: 'Someone followed you!',
+                        userId,
+                    }
+                });
+
+                await db.user.update({
+                    where: {
+                        id: userId,
+                    },
+                    data: {
+                        hasNotification: true,
+                    },
+                });
+
+            }catch(error){
+                console.log(error);
+            }
         }
 
         // unfollow edilecekse
