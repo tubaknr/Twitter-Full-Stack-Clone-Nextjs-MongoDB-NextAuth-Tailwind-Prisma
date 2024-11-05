@@ -3,6 +3,10 @@
 
 [Screencast from 05-11-2024 21:00:59.webm](https://github.com/user-attachments/assets/88166f0a-10b8-4e02-9346-d448be823633)
 
+## Like:
+
+[kaynak-hizlandirildi-8.webm](https://github.com/user-attachments/assets/bc8e67bd-fe1d-48dc-a83a-0b3444bb6839)
+
 
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
