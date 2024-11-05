@@ -1,6 +1,7 @@
-## Twitter Full Stack Clone Project - Nextjs13
-# Login:
-- [Screencast from 05-11-2024 21:00:59.webm](https://github.com/user-attachments/assets/c1d6999d-d326-41e7-9909-9f7a29485605)
+# Twitter Full Stack Clone Project - Nextjs13
+## Login:
+
+[Screencast from 05-11-2024 21:00:59.webm](https://github.com/user-attachments/assets/88166f0a-10b8-4e02-9346-d448be823633)
 
 
 
