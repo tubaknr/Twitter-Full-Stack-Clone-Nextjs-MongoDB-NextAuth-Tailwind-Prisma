@@ -3,7 +3,7 @@ import serverAuth from "@/lib/serverAuth";
 import { getCurrentUser } from "@/lib/session";
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import { authOptions } from "../auth/[...nextauth]/options";
 
 export async function POST(req: NextRequest) {
 

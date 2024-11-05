@@ -1,12 +1,19 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { db } from '@/lib/db';
+import { getCurrentUser } from "@/lib/session";
 
 export default async function handler(req:NextApiRequest, res:NextApiResponse) {
     if(req.method !== "GET"){
         return res.status(405).end();
     }
     try{
-        const { userId } = req.query;
+        // console.log("REQQQQQ:",req);
+        // const { userId } = req.query;
+        // console.log("NOTIFICATIONS/[USERID] : req.query: ",req.query);
+
+        const currentUser = await getCurrentUser();
+        const userId = currentUser.id;
+
         if(!userId || typeof userId !== 'string'){
             throw new Error("Invalid ID");
         }

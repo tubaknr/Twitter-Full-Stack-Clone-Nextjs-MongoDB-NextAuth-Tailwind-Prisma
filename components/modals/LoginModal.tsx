@@ -28,96 +28,17 @@ const LoginModal = () => {
     const onSubmit = useCallback(async () => {
         try{
             setIsLoading(true);
-            console.log("LOGINMODAL 11");
-            console.log("LOGINMODAL 11");
-            console.log("LOGINMODAL 11");
-            console.log("LOGINMODAL 11");
-            console.log("LOGINMODAL 11");
-            console.log("LOGINMODAL 11");
-            console.log("LOGINMODAL 11");
-            console.log("LOGINMODAL 11");
-            console.log("LOGINMODAL 11");
-            console.log("LOGINMODAL 11");
-            console.log("LOGINMODAL 11");
-            const resp = await signIn('credentials', {email, password});
-            console.log("LOGINMODAL 2");
-            console.log("LOGINMODAL 2");
-            console.log("LOGINMODAL 2");
-            console.log("LOGINMODAL 2");
-            console.log("LOGINMODAL 2");
-            console.log("LOGINMODAL 2");
-            console.log("LOGINMODAL 2");
-            console.log("LOGINMODAL 2");
-            console.log("LOGINMODAL 2");
-            console.log("LOGINMODAL 2");
 
-            console.log("LOGINMODAL 2");
-            console.log("LOGINMODAL 2");
+            console.log("LOGINMODAL 111111111");
 
-            console.log("LOGINMODAL 2");
-            console.log("LOGINMODAL 2");
-            console.log("LOGINMODAL 2");
+            await signIn('credentials', {email, password});
 
-            console.log("LOGINMODAL 2");
-            console.log("LOGINMODAL 2");
-            console.log("LOGINMODAL 2");
+            console.log("LOGINMODAL 22222222");
 
-            console.log("LOGINMODAL 2");
-            console.log("LOGINMODAL 2");
-
-            console.log("LOGINMODAL 2");
-            console.log("LOGINMODAL 2");
-            console.log("LOGINMODAL 2");
-            console.log("LOGINMODAL 2");
-
-            console.log("LOGINMODAL 2");
-            console.log("LOGINMODAL 2");
-            console.log("LOGINMODAL 2");
-
-            console.log("LOGINMODAL 2");
-
-
-            console.log("LOGINMODAL 2");
-            console.log("LOGINMODAL 2");
-            console.log("LOGINMODAL 2");
-            console.log("LOGINMODAL 2");
-            console.log("LOGINMODAL 2");
-            console.log("LOGINMODAL 2");
-
-
-            console.log("LOGINMODAL 2");
-
-            console.log("LOGINMODAL 2");
-            console.log("LOGINMODAL 2");
-
-            console.log("LOGINMODAL 2");
-            console.log("LOGINMODAL 2");
-
-            console.log("RESP: LOGINMODAL: ", resp);
-            console.log("RESP: LOGINMODAL: ", resp);
-            console.log("RESP: LOGINMODAL: ", resp);
-            console.log("RESP: LOGINMODAL: ", resp);
-            console.log("RESP: LOGINMODAL: ", resp);
-            console.log("RESP: LOGINMODAL: ", resp);
-            console.log("RESP: LOGINMODAL: ", resp);
-            console.log("RESP: LOGINMODAL: ", resp);
-            console.log("RESP: LOGINMODAL: ", resp);
-            console.log("RESP: LOGINMODAL: ", resp);
-            console.log("RESP: LOGINMODAL: ", resp);
-            console.log("RESP: LOGINMODAL: ", resp);
-            console.log("RESP: LOGINMODAL: ", resp);
-            console.log("RESP: LOGINMODAL: ", resp);
-            console.log("RESP: LOGINMODAL: ", resp);
-            console.log("RESP: LOGINMODAL: ", resp);
-            console.log("RESP: LOGINMODAL: ", resp);
-            console.log("RESP: LOGINMODAL: ", resp);
-
-
-            console.log("RESP: LOGINMODAL: ", resp);
             loginModal.onClose();
 
         }catch(error){
-            console.log(error);
+            console.log("LOGIN MODAL SIGN IN ERROR: ", error);
 
         }finally{
             setIsLoading(false);
@@ -130,14 +51,14 @@ const LoginModal = () => {
         <div className="flex flex-col gap-4">
             <Input 
                 placeholder="Email"
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e: any) => {setEmail(e.target.value)}}
                 value={email}
                 disabled={isLoading}
             />
             <Input 
                 placeholder="Password"
                 type="password"
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e: any) => {setPassword(e.target.value)}}
                 value={password}
                 disabled={isLoading}
             />
@@ -148,7 +69,7 @@ const LoginModal = () => {
     const footerContent = (
         <div className="text-neutral-400 text-center mt-4">
             <p>
-                First time using Plitter? &nbsp;  
+                First time using Twitter? &nbsp;  
                 <span onClick={onToggle}
                       className="text-white cursor-pointer hover:underline">
                       Create an account 

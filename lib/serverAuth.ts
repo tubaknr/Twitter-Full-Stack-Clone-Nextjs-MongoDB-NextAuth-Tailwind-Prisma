@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
-import prisma from './db';
-import { authOptions } from '@/pages/auth/[...nextauth]';
+import { prisma } from './db';
+import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import { NextRequest, NextResponse } from "next/server";
 import { NextApiRequest, NextApiResponse } from "next";
 import { useSession, signIn, signOut } from "next-auth/react"

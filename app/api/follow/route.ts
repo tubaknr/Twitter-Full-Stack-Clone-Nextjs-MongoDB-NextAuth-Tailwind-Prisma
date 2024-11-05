@@ -18,16 +18,17 @@ async function handleFollowUnfollow(req: Request, method: string) {
         // extract userId from request query pms.
         // this is the ID of the user you want to follow or unfollow!!!!!
         // const { userId } = req.query;
-        const { userId } = await req.json();
+        // const { userId } = await req.json();
 
         // follow yada unfollow ETMEK İSTEYEN KULLANICI
         const authResult = await getCurrentUser();
 
-        if (!authResult || !authResult.currentUser){
+        if (!authResult){
             return NextResponse.json({ error: "Current user not found. follow.ts" }, { status: 404 })
         }
 
         const currentUser = authResult;
+        const userId = currentUser?.id;
         console.log("CURRENTUSER, FOLLOW.TS: ", currentUser);
 
 

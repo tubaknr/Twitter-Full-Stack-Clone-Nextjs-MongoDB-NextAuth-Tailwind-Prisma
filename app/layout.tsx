@@ -1,7 +1,7 @@
 "use client";
 
 import type { Metadata } from "next";
-import { authOptions } from "@/pages/auth/[...nextauth]";
+import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import "./globals.css";
 import Sidebar from "@/components/Sidebar";
 import FollowBar from "@/components/FollowBar";

@@ -1,7 +1,7 @@
 import serverAuth from "@/lib/serverAuth";
 import { NextApiRequest, NextApiResponse } from "next";
 import { NextRequest, NextResponse } from "next/server";
-import { authOptions } from "../../../pages/auth/[...nextauth]";
+import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import { getCurrentUser } from "@/lib/session";
 
 export async function GET(req: NextRequest, res:NextResponse) {
