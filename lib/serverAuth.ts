@@ -25,13 +25,6 @@ function exclude<User, Key extends keyof User>(
 
     // const session = await getServerSession(req, res, authOptions) //!!!!!!!!!!!!!!
 
-    // const { data: session, status } = useSession(); //!!!!!!!!!!!!!!
-    // console.log("Session Data: SERVERAUTH.ts ", session);
-    // console.log("STATUS: SERVERAUTHTS: ", status);
-    // console.log(!session?.user?.email);
-    
-
-
       const headers = {
         "Content-Type": "application/json",
         // Cookie: allCookies,

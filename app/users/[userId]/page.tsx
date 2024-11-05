@@ -13,11 +13,10 @@ const UserView = ()  => {
     const userId = pathname.split('/').pop();//CORRECT
 
     // const { userId } = useParams();
-    console.log("userId USEVIEW USERS/PAGE.TSX: ",userId); //CORRECT
+    // console.log("userId USEVIEW USERS/PAGE.TSX: ",userId); //CORRECT
 
     const { data: fetchedUser, isLoading } = useUser(userId as string);
-    
-    console.log("fetchedUser: USERS/[USERID]/PAGE.TSX: ",fetchedUser);
+    // console.log("fetchedUser: USERS/[USERID]/PAGE.TSX: ",fetchedUser);
     
     if (isLoading){
         return(

@@ -2,17 +2,27 @@ import { db } from "@/lib/db";
 import { getCurrentUser } from "@/lib/session";
 import { NextRequest, NextResponse } from "next/server";
 import { NextApiRequest } from "next";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]/options";
 
 export async function POST(req: NextRequest, res: NextResponse,  { params }: { params: {postId: string} }){
     try{
-        const currentUser = getCurrentUser();
-        const { body } = req.body;
-        console.log("BODY : ", req.body);
+        const session = await getServerSession(authOptions);
+
+        const currentUser = await db.user.findUnique({
+            where:{
+                email: session?.user?.email,
+            },
+        });
+
+        const { body } = await req.body;
+        console.log("BODY BODYYYYYYYYYYY : ", req.body); //????
+        // console.log("BODY JSONNNNNNNNNNNN: ", req.json());
         // const { postId } = req.query; 
 
             
         const { postId } = params; 
-        console.log("POSTID [POSTID]/ROUTES.TS: ", postId);
+        console.log("POSTID [POSTID]/ROUTES.TSSSSSSSSSSSSSSSSSSSSS: ", postId);
 
 
         // GELEN URL = "/api/comments?postId=" + postId

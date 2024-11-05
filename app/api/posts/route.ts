@@ -8,20 +8,24 @@ import { authOptions } from "../auth/[...nextauth]/options";
 export async function POST(req: NextRequest) {
 
     try{
+
         const session = await getServerSession(authOptions);
 
-        if (!session) {
-            return new Response("Unauthorized", { status: 403 })
-        }
-        const { user } = session;
+        const currentUser = await db.user.findUnique({
+            where:{
+                email: session?.user?.email,
+            },
+        });
+        // console.log("USER API currentUserRRRRRRRRRRR: ", currentUser);//CORRECT
+        // console.log("USER API currentUserRRRRRRRRRRR.IDDDD: ", currentUser?.id);//CORRECT
 
-        //GELEN URL = "api/posts"
-        const { body } = await req.json(); //BODY
+        const { body } = await req.json(); //BODY  //CORRECT
+        // console.log("USER API POSTTTTTT BODYYYYYYYY: ", body); //CORRECT
 
         const posts = await db.post.create({
             data: {
                 body: body,
-                userId: user?.id,
+                userId: currentUser?.id,
             }
         }) ;
 

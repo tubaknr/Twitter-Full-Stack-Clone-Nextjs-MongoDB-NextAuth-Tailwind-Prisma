@@ -7,7 +7,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 const useLike = ({ postId, userId } : { postId: string, userId?:string }) => {
-    console.log("postId USELIKE.TS:", postId);//CORRECT
+    // console.log("postId USELIKE.TS:", postId);//CORRECT
 
     const { data: currentUser } = useCurrentUser();
     

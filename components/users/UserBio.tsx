@@ -7,6 +7,7 @@ import { BiCalendar } from 'react-icons/bi';
 import useEditModal from "@/hooks/useEditModal";
 import useFollow from "@/hooks/useFollow";
 import { usePathname } from 'next/navigation';
+import { useSession } from "next-auth/react"
 
 interface UserBioProps{
     userId: string;
@@ -14,16 +15,13 @@ interface UserBioProps{
 
 const UserBio: React.FC<UserBioProps> = ({ userId }) => {
     
-    const { data: currentUser } = useCurrentUser();
+    const { data: session, status } = useSession();
+    // console.log("CURRENTUSER USER BIOOOOOO: " ,session.user);//CORRECT
+
     let pathname = usePathname();//CORRECT
     let fetchedUserId = pathname.split('/').pop();//CORRECT
-    console.log("user ıd:", fetchedUserId);
-
-    // ÇEKEMİYOR
-    const { data: fetchedUser, isLoading } = useUser(fetchedUserId);
-
-    console.log("fetchedUser USERBIOO from useUser : ", fetchedUser);
-
+    const { data: fetchedUser, isLoading } = useUser(fetchedUserId as string);//CORRECT
+    // console.log("FETCHEDUSERRRRR: ", fetchedUser.name)//CORRECT
 
     const editModal = useEditModal();
 
@@ -41,7 +39,7 @@ const UserBio: React.FC<UserBioProps> = ({ userId }) => {
         <div className="border-b-[1px] border-neutral-800 pb-4">
             <div className="flex justify-end p-2">
 
-                {currentUser?.id === userId ? (
+                {session?.user.name === fetchedUser.name ? (
                     <Button onClick={editModal.onOpen} label="Edit" secondary/>
                 ) : (
                     <Button onClick={toggleFollow} 

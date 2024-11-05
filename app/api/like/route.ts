@@ -3,21 +3,21 @@ import serverAuth from "@/lib/serverAuth";
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/session";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]/options";
 
 async function handleLike(req: Request, method: string){
 
     try{
-        const { postId } = await req.json();
-        console.log("POSTID: LIKE.TS: ", postId);
+        const { postId } = await req.json();//CORRECT
+  
+        const session = await getServerSession(authOptions);//CORRECT
 
-        const authResult = await getCurrentUser();
-
-        if (!authResult || !authResult.currentUser){
-            return NextResponse.json({ error: "Current user not found. like.ts" }, { status: 404 })
-        }
-
-        const currentUser = authResult;
-        console.log("CURRENTUSER, LIKE.TS: ", currentUser);
+        const currentUser = await db.user.findUnique({//CORRECT
+            where:{
+                email: session?.user?.email,
+            },
+        });
         
         if (!postId || typeof postId!=="string"){
             throw new Error("Invalid ID LIKE.TS");
@@ -33,6 +33,7 @@ async function handleLike(req: Request, method: string){
         if(!post){
             throw new Error("Post not found. like.ts");
         }
+        console.log("POSTTTTTTTTTTTTTTT: ", post)
 
         let updatedLikedIds = [...(post.likedIds || [])];
         

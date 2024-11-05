@@ -21,7 +21,7 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId }) => {
 
     const { data: currentUser } = useCurrentUser();
 
-    console.log("data.id POSTID POSTITEM.TSX:", data.id)//TAMAM
+    // console.log("data.id POSTID POSTITEM.TSX:", data.id)//TAMAM
     // console.log("USERIDDDDDDDDDDDDD PSOTITEM.TSX: ", userId);//!!!!
 
     const { hasLiked, toggleLike } = useLike({ postId: data.id, userId: userId});

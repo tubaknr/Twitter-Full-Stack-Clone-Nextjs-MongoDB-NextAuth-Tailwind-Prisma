@@ -17,7 +17,7 @@ const PostView = () => {
     // console.log(pathname);
     const postId = pathname.split('/').pop();//CORRECT
     const { data: fetchedPost, isLoading } = usePost(postId); //CORRECT
-    console.log("fetchedPostttttttt PAGE.TSX [POSTID]:",fetchedPost);//CORRECT
+    // console.log("fetchedPostttttttt PAGE.TSX [POSTID]:",fetchedPost);//CORRECT
 
 
     if (isLoading || !fetchedPost){

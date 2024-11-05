@@ -34,48 +34,48 @@ export const authOptions: NextAuthOptions = {
                     //     where: { email: 'test5@gmail.com' }
                     // });
 
-                    const user = { email: "test5@gmail.com", password: "test5"}
+                    // const user = { email: "test5@gmail.com", password: "test5"}
 
-                    if(credentials?.email === user?.email && credentials?.password === user?.password){
-                        return user;
+                    // if(credentials?.email === user?.email && credentials?.password === user?.password){
+                    //     return user;
+                    // }
+                    // else{
+                    //     return null;
+                    // };
+                // }
+
+                if(!credentials?.email || !credentials?.password){
+                    console.log(" Email and password required. ...Nextauth");
+                    throw new Error(" Email and password required. ...Nextauth");
+                }
+
+                const user = await db.user.findUnique({
+                    where: {
+                        email: credentials.email,
                     }
-                    else{
-                        return null;
-                    };
-                // }
+                });
 
-                // if(!credentials?.email || !credentials?.password){
-                //     console.log(" Email and password required. ...Nextauth");
-                //     throw new Error(" Email and password required. ...Nextauth");
-                // }
-
-                // const user = await db.user.findUnique({
-                //     where: {
-                //         email: credentials.email,
-                //     }
-                // });
-
-                // if(!user || !user?.hashedPassword){
-                //     console.log("No user found. Invalid credentials. ...Nextauth");
-                //     throw new Error("No user found. Invalid credentials. ...Nextauth");
+                if(!user || !user?.hashedPassword){
+                    console.log("No user found. Invalid credentials. ...Nextauth");
+                    throw new Error("No user found. Invalid credentials. ...Nextauth");
                     
-                // }
+                }
 
-                // console.log("User FOUNDDDDDD. Password s checking... NextAuth.");
+                console.log("User FOUNDDDDDD. Password s checking... NextAuth.");
 
-                // const isCorrectPassword = await bcrypt.compare(
-                //     credentials.password,
-                //     user.hashedPassword
-                // );
+                const isCorrectPassword = await bcrypt.compare(
+                    credentials.password,
+                    user.hashedPassword
+                );
 
-                // if(!isCorrectPassword){
-                //     console.log("Invalid credentials. Passwords dont match. ...Nextauth");
-                //     throw new Error("Invalid credentials. Passwords dont match. ...Nextauth");
-                // }
+                if(!isCorrectPassword){
+                    console.log("Invalid credentials. Passwords dont match. ...Nextauth");
+                    throw new Error("Invalid credentials. Passwords dont match. ...Nextauth");
+                }
 
-                // console.log("Passwords matched. Successfull. User is returng. NextAuth.");
+                console.log("Passwords matched. Successfull. User is returng. NextAuth.");
                 
-                // return user;
+                return user;
             } 
 
         })
