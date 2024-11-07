@@ -5,7 +5,9 @@ import { NextApiRequest } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/options";
 
-export async function POST(req: NextRequest, res: NextResponse,  { params }: { params: {postId: string} }){
+export async function POST(req: NextRequest, res: NextResponse,  
+                            // { params }: { params: {postId: string} }
+                        ){
     try{
         const session = await getServerSession(authOptions);
 
@@ -15,31 +17,27 @@ export async function POST(req: NextRequest, res: NextResponse,  { params }: { p
             },
         });
 
-        const { body } = await req.body;
-        console.log("BODY BODYYYYYYYYYYY : ", req.body); //????
-        // console.log("BODY JSONNNNNNNNNNNN: ", req.json());
-        // const { postId } = req.query; 
+        const { body } = await req.json(); //CORRECT
+        console.log("BODY BODYYYYYYYYYYY : ", req.body); //CORRECT
 
-            
-        const { postId } = params; 
-        console.log("POSTID [POSTID]/ROUTES.TSSSSSSSSSSSSSSSSSSSSS: ", postId);
-
-
-        // GELEN URL = "/api/comments?postId=" + postId
-
+        const url = new URL(req.url);//CORRECT
+        const postId = url.searchParams.get("postId"); //CORRECT
         if(!postId || typeof postId !== 'string'){
             throw new Error("There is no postId. COMMENTS.TS ");
         }
 
+
+        // Create Comment
         const comment = await db.comment.create({
             data:{
                 body,
-                userId: currentUser.id,
+                userId: currentUser?.id,
                 postId,
             }
         });
         
         try{
+            // Create Notification
             const post = await db.post.findUnique({
              where:{
                  id: postId,
@@ -74,4 +72,3 @@ export async function POST(req: NextRequest, res: NextResponse,  { params }: { p
         console.log("API COMMENTS ERROR: ", error);
     }
 };
-
